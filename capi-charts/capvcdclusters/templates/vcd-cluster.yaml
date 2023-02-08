@@ -5,14 +5,14 @@ metadata:
 spec:
   site: {{ .Values.vcd.site }} # VCD endpoint with the format https://VCD_HOST. No trailing '/'
   org:  {{ .Values.vcd.org }}# VCD organization name where the cluster should be deployed
-  ovdc: {{ .Values.vcd.org.vdc }} # VCD virtual datacenter name where the cluster should be deployed
-  ovdcNetwork: {{ .Values.vcd.org.vdc.network }} # VCD virtual datacenter network to be used by the cluster
+  ovdc: {{ .Values.vcd.org_vdc }} # VCD virtual datacenter name where the cluster should be deployed
+  ovdcNetwork: {{ .Values.vcd.org_vdc_network }} # VCD virtual datacenter network to be used by the cluster
   useAsManagementCluster: {{ .Values.cluster.isManagement }} # intent to use the resultant CAPVCD cluster as a management cluster
   userContext:
     secretRef:
       name: capi-user-credentials-{{ .Values.cluster.name }} # name of the secret containing the credentials of the VCD persona creating the cluster
       namespace: {{ .Release.Namespace }} # name of the secret containing the credentials of the VCD persona creating the cluster
-  rdeId: NO_RDE-{{ .Values.vcd.org.vdc }}-{{ .Values.cluster.name }} # rdeId if it is already created. If empty, CAPVCD will create one for the cluster.
+  rdeId: NO_RDE-{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }} # rdeId if it is already created. If empty, CAPVCD will create one for the cluster.
   controlPlaneEndpoint:
     host: {{ .Values.cluster.controlPlaneVIP }}
     port: 6443
