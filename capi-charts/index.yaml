@@ -3,12 +3,12 @@ entries:
   capvcdclusters:
   - apiVersion: v2
     appVersion: 2.4.0
-    created: "2023-02-08T06:28:05.318951-05:00"
+    created: "2023-02-08T06:39:01.423016-05:00"
     description: This chart is to deplot kubernetes clusters using CAPVCD
-    digest: 4770a27eea7eb8ef504038a02a398dee26752554eb652479b3da7c0222a6bb68
+    digest: 037dd517d667584c747af6596ae90f31465e07dc3221b38ccc00b5dc3494fcaa
     name: capvcdclusters
-    type: library
+    type: application
     urls:
     - https://raw.githubusercontent.com/arbhoj/capvcd-helm/master/capi-charts/capvcdclusters-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-08T06:28:05.318676-05:00"
+generated: "2023-02-08T06:39:01.422735-05:00"
