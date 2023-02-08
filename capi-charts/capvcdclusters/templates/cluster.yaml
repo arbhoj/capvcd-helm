@@ -1,0 +1,28 @@
+apiVersion: cluster.x-k8s.io/v1beta1
+kind: Cluster
+metadata:
+  name: {{ .Values.cluster.name }}
+  labels:
+    cni: {{ .Values.cluster.cni }}
+    ccm: {{ .Values.cluster.ccm }}
+    csi: {{ .Values.cluster.csi }}
+    konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
+spec:
+  clusterNetwork:
+    pods:
+      cidrBlocks:
+        - {{ .Values.cluster.cidr.pod }}
+    serviceDomain: cluster.local
+    services:
+      cidrBlocks:
+        - {{ .Values.cluster.cidr.pod }}
+  controlPlaneRef:
+    apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+    kind: KubeadmControlPlane
+    name: {{ .Values.clusterName }}-control-plane # name of the KubeadmControlPlane object associated with the cluster.
+    namespace: {{ .Release.Namespace }}
+  infrastructureRef:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+    kind: VCDCluster
+    name: {{ .Values.cluster.name }}
+    namespace: {{ .Release.Namespace }} 

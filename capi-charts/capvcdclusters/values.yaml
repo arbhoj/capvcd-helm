@@ -1,0 +1,7 @@
+cluster:
+  cni: external
+  ccm: antrea  
+  csi: external 
+  cidr:
+    pod: 99.96.0.0/11
+    service: 99.64.0.0/13
