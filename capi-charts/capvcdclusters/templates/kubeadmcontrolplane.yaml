@@ -350,4 +350,4 @@ spec:
       name: {{ .Values.cluster.name }}-control-plane # name of the VCDMachineTemplate object used to deploy control plane VMs. Should be the same name as that of KubeadmControlPlane object
       namespace: {{ .Release.Namespace }} # kubernetes namespace of the VCDMachineTemplate object. Should be the same namespace as that of the Cluster object
   replicas: {{ .Values.controlplane.replicas}} # desired number of control plane nodes for the cluster
-  version: {{ {{ .Values.cluster.kubernetesVersion }} # Kubernetes version to be used to create (or) upgrade the control plane nodes. The value needs to be retrieved from the respective TKGm ova BOM. Refer to the documentation.
+  version: {{ .Values.cluster.kubernetesVersion }} # Kubernetes version to be used to create (or) upgrade the control plane nodes. The value needs to be retrieved from the respective TKGm ova BOM. Refer to the documentation.
