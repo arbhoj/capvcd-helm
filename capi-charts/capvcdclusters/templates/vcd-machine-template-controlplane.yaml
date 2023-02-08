@@ -5,9 +5,9 @@ metadata:
 spec:
   template:
     spec:
-      catalog: {{ .Values.controlPlaneMachineTemplate.catalog }} # Catalog hosting the TKGm template, which will be used to deploy the control plane VMs
-      template: {{ .Values.controlPlaneMachineTemplate.vAppTemplate }} # Name of the template to be used to create (or) upgrade the control plane nodes
-      sizingPolicy: {{ .Values.controlPlaneMachineTemplate.sizingPolicy }} # Sizing policy to be used for the control plane VMs (this must be pre-published on the chosen organization virtual datacenter)
-      placementPolicy: {{ .Values.controlPlaneMachineTemplate.placementPolicy }} # Placement policy to be used for worker VMs (this must be pre-published on the chosen organization virtual datacenter)
-      storageProfile: {{ .Values.controlPlaneMachineTemplate.storageProfile }} # Storage profile to be used for the control plane VMs (this must be pre-published on the chosen organization virtual datacenter)
+      catalog: {{ .Values.controlPlaneMachineTemplate.catalog }}
+      template: {{ .Values.controlPlaneMachineTemplate.vAppTemplate }}
+      sizingPolicy: {{ .Values.controlPlaneMachineTemplate.sizingPolicy }}
+      placementPolicy: {{ .Values.controlPlaneMachineTemplate.placementPolicy }}
+      storageProfile: {{ .Values.controlPlaneMachineTemplate.storageProfile }}
       enableNvidiaGPU: {{ .Values.controlPlaneMachineTemplate.enableNvidiaGPU }}
