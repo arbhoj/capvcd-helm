@@ -14,7 +14,7 @@ spec:
       namespace: {{ .Release.Namespace }} # name of the secret containing the credentials of the VCD persona creating the cluster
   rdeId: NO_RDE-{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }} # rdeId if it is already created. If empty, CAPVCD will create one for the cluster.
   controlPlaneEndpoint:
-    host: {{ .Values.cluster.controlPlaneVIP }}
+    host: {{ .Values.cluster.controlplane.vip_ip }}
     port: 6443
   #loadBalancerConfigSpec:
    # useOneArm: ${USE_ONE_ARM}
