@@ -12,7 +12,7 @@ spec:
     secretRef:
       name: capi-user-credentials-{{ .Values.cluster.name }}
       namespace: {{ .Release.Namespace }}
-  rdeId: NO_RDE-{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
+  rdeId: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
   controlPlaneEndpoint:
     host: {{ .Values.cluster.controlplane.vip_ip }}
     port: 6443
