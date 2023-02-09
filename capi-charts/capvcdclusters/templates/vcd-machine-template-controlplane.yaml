@@ -5,8 +5,8 @@ metadata:
 spec:
   template:
     spec:
-      catalog: {{ .Values.controlPlaneMachineTemplate.catalog }}
-      template: {{ .Values.controlPlaneMachineTemplate.vAppTemplate }}
+      catalog: {{ .Values.cluster.catalog }}
+      template: {{ .Values.cluster.vAppTemplate }}
       sizingPolicy: {{ .Values.controlPlaneMachineTemplate.sizingPolicy }}
       placementPolicy: {{ .Values.controlPlaneMachineTemplate.placementPolicy }}
       storageProfile: {{ .Values.controlPlaneMachineTemplate.storageProfile }}

@@ -10,7 +10,7 @@ spec:
   useAsManagementCluster: {{ .Values.cluster.isManagement }}
   userContext:
     secretRef:
-      name: capi-user-credentials-{{ .Values.cluster.name }}
+      name: {{ .Values.cluster.capv_credentials_secret }}
       namespace: {{ .Release.Namespace }}
   rdeId: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
   controlPlaneEndpoint:

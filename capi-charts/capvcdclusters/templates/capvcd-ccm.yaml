@@ -1,0 +1,98 @@
+apiVersion: addons.cluster.x-k8s.io/v1alpha4
+kind: ClusterResourceSet
+metadata:
+  labels:
+    konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
+  name: ccm-cpi-config-{{ .Values.cluster.name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  clusterSelector:
+    matchLabels:
+      konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
+  resources:
+  - kind: ConfigMap
+    name: capvcd-cm-{{ .Values.cluster.name }}
+  - kind: Secret
+    name: capvcd-secret-{{ .Values.cluster.name }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: capvcd-secret-{{ .Values.cluster.name }}
+type: addons.cluster.x-k8s.io/resource-set
+stringData:
+  capvcd-secret.yaml: |-
+    ---
+    apiVersion: v1
+    stringData:
+      clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }} 
+    kind: Secret
+    metadata:
+      name: vcloud-clusterid-secret
+      namespace: kube-system
+    ---
+    apiVersion: v1
+    data:
+      refreshToken: {{ .Values.cluster.refresh_token_b64 }}
+    kind: Secret
+    metadata:
+      name: vcloud-basic-auth
+      namespace: kube-system
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: capvcd-cm-{{ .Values.cluster.name }}
+data:
+  capvcd-config.yaml: |-
+    ---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: vcloud-csi-configmap
+      namespace: kube-system
+    data:
+      vcloud-csi-config.yaml: |+
+        vcd:
+          host: {{ .Values.vcd.site }}
+          org: {{ .Values.vcd.org }}
+          vdc: {{ .Values.vcd.org_vdc }}
+          vAppName: {{ .Values.cluster.name }}
+        clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
+    immutable: true
+    ---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: vcloud-ccm-configmap
+      namespace: kube-system
+    data:
+      vcloud-ccm-config.yaml: |+
+        vcd:
+          host: {{ .Values.vcd.site }}
+          org: {{ .Values.vcd.org }}
+          vdc: {{ .Values.vcd.org_vdc }}
+        clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
+        vAppName: {{ .Values.cluster.name }}
+        loadbalancer:
+          network: {{ .Values.vcd.org_vdc_network }}
+          enableVirtualServiceSharedIP: true
+          oneArm:
+            startIP: "10.20.0.8"
+            endIP: "10.20.0.9"
+          ports:
+            http: 80
+            https: 443
+    immutable: true
+    ---
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
+      name: vcd-disk-dev
+    provisioner: named-disk.csi.cloud-director.vmware.com
+    reclaimPolicy: Delete
+    parameters:
+      storageProfile: {{ .Values.cluster.kubernetes_pv_storageProfile }}
+      filesystem: "ext4"

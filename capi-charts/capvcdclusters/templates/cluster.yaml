@@ -15,7 +15,7 @@ spec:
     serviceDomain: cluster.local
     services:
       cidrBlocks:
-        - {{ .Values.cluster.cidr.pod }}
+        - {{ .Values.cluster.cidr.service }}
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
     kind: KubeadmControlPlane
