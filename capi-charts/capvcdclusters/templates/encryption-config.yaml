@@ -8,5 +8,5 @@ metadata:
     cluster.x-k8s.io/cluster-name: {{ .Values.cluster.name }}
     clusterctl.cluster.x-k8s.io/move: ""
   name: {{ .Values.cluster.name }}-etcd-encryption-config
-  namespace: default
+  namespace: {{ .Release.Namespace }}
 type: Opaque
