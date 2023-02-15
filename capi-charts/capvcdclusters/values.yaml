@@ -5,6 +5,7 @@ cluster:
   cidr:
     pod: 99.96.0.0/11
     service: 99.64.0.0/13
+  kubernetesVersion: v1.24.6
   isManagement: false
   controlPlaneVIP:
   http_proxy:
@@ -16,7 +17,6 @@ cluster:
     vip_ip:
     ssh_key:
     replicas: 3
-    kubernetesVersion: v1.24.6
 vcd:
   refreshToken:
   site: https://192.168.140.181
@@ -27,6 +27,11 @@ controlMachinePlaneTemplate:
   catalog: dkp
   vAppTemplate: dkp-2.4.0-airgapped-ubuntu-k8s-v1.24.6
   sizingPolicy: dkp_control_standard
+  placementPolicy:
+  storageProfile: vSAN Default Storage Policy
+  enableNvidiaGPU: false
+workerNodesMachineTemplate:
+  sizingPolicy: dkp_worker_standard
   placementPolicy:
   storageProfile: vSAN Default Storage Policy
   enableNvidiaGPU: false

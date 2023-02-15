@@ -2,7 +2,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: {{ .Values.cluster.name }}-worker-pool-1
+  name: {{ .Values.cluster.name }}-wp1
   namespace: {{ .Release.Namespace }}
 spec:
   clusterName: {{ .Values.cluster.name }}
@@ -15,12 +15,12 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: {{ .Values.cluster.name }}-worker-pool-1
+          name: {{ .Values.cluster.name }}-wp1
           namespace: {{ .Release.Namespace }}
       clusterName: {{ .Values.cluster.name }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: VCDMachineTemplate
-        name: {{ .Values.cluster.name }}-worker-pool-1
+        name: {{ .Values.cluster.name }}-wp1-{{ .Values.cluster.kubernetesVersion }}
         namespace: {{ .Release.Namespace }}
       version: {{ .Values.cluster.kubernetesVersion }} 
