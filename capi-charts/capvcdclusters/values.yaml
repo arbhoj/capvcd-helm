@@ -6,6 +6,8 @@ cluster:
     pod: 99.96.0.0/11
     service: 99.64.0.0/13
   kubernetesVersion: v1.24.6
+  lastKubernetesVersion: null
+  lastvCDTemplate: null
   isManagement: false
   controlPlaneVIP:
   http_proxy:
