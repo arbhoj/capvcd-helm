@@ -35,18 +35,18 @@
 #    enableNvidiaGPU: false
 #    catalog: dkp-test-cp
 #    vAppTemplate: dkp-2.4.0-airgapped-ubuntu-test-k8s-v1.24.6
-#workerNodePools:
-#- poolName: wkrp1
-#  replicas: 2
-#  ssh_key:
-#  workerNodesMachineTemplate:
-#    sizingPolicy: dkp_worker_standard
-#    placementPolicy: null
-#    storageProfile: vSAN Default Storage Policy
-#    enableNvidiaGPU: false
-#    catalog: dkp-test-wp #Optionally Override value decleared at cluster level
-#    vAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.25.6 #Optionally Override value decleared at cluster level
-#    lastvAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.24.6 #Optionally Override value decleared at cluster level
+workerNodePools:
+- poolName: wkrp1
+  replicas: 2
+  ssh_key:
+  workerNodesMachineTemplate:
+    sizingPolicy: dkp_worker_standard
+    placementPolicy: null
+    storageProfile: vSAN Default Storage Policy
+    enableNvidiaGPU: false
+    catalog: # dkp-test-wp #Optionally Override value declared at cluster level
+    vAppTemplate: # dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.25.6 #Optionally Override value declared at cluster level
+    lastvAppTemplate: # dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.24.6 #Optionally Override value declared at cluster level
 #- poolName: wkrp2
 #  replicas: 2
 #  ssh_key:
@@ -55,6 +55,6 @@
 #    placementPolicy: null
 #    storageProfile: vSAN Default Storage Policy
 #    enableNvidiaGPU: false
-#    catalog:  #Optionally Override value decleared at cluster level
-#    vAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp2-k8s-v1.25.6 #Optionally Override value decleared at cluster level
-#    lastvAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.24.6 #Optionally Override value decleared at cluster level
+#    catalog:  #Optionally Override value declared at cluster level
+#    vAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp2-k8s-v1.25.6 #Optionally Override value declared at cluster level
+#    lastvAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.24.6 #Optionally Override value declared at cluster level
