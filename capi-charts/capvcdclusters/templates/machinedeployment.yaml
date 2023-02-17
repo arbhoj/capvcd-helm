@@ -25,7 +25,7 @@ spec:
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: VCDMachineTemplate
-        name: {{ $releaseName }}-{{ $workerNodePool.poolName }}-{{ $cluster.kubernetesVersion }}
+        name: {{ $workerNodePool.poolClass }}-{{ $cluster.kubernetesVersion }}
         namespace: {{ $releaseNamespace }}
       version: {{ $cluster.kubernetesVersion }}
 {{- end }} 
