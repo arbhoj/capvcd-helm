@@ -2,7 +2,6 @@
 {{- $releaseNamespace := .Release.Namespace }}
 {{- $cluster := .Values.cluster }}
 {{- range $key, $workerNodePool := .Values.workerNodePools }}
----
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
@@ -28,4 +27,5 @@ spec:
         name: {{ $workerNodePool.poolClass }}-{{ $cluster.kubernetesVersion }}
         namespace: {{ $releaseNamespace }}
       version: {{ $cluster.kubernetesVersion }}
+---
 {{- end }} 

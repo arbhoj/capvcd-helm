@@ -84,4 +84,5 @@ spec:
           done
         path: /run/konvoy/restart-containerd-and-wait.sh
         permissions: "0700"
+---
 {{- end }}

@@ -29,7 +29,7 @@
 #  replicas: 3
 #  ssh_key:
 #  poolClass: standard
-workerNodePools:
+#workerNodePools:
 #- poolName: wkrp1
 #  replicas: 2
 #  ssh_key:
