@@ -1,12 +1,16 @@
+{{- $releaseName := .Release.Name  }}
+{{- $releaseNamespace := .Release.Namespace }}
+{{- $cluster := .Values.cluster }}
+{{- range $key, $workerNodePool := .Values.workerNodePools }}
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: {{ .Values.cluster.name }}-wp1
-  namespace: {{ .Release.Namespace }}
+  name: {{ $releaseName }}-{{ $workerNodePool.poolName }}
+  namespace: {{ $releaseNamespace }}
 spec:
-  clusterName: {{ .Values.cluster.name }}
-  replicas: {{ .Values.cluster.workerNodes.replicas}} 
+  clusterName: {{ $releaseName }}
+  replicas: {{ $workerNodePool.replicas }} 
   selector:
     matchLabels: null
   template:
@@ -15,12 +19,13 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: {{ .Values.cluster.name }}-wp1
-          namespace: {{ .Release.Namespace }}
-      clusterName: {{ .Values.cluster.name }}
+          name: {{ $releaseName }}-{{ $workerNodePool.poolName }}
+          namespace: {{ $releaseNamespace }}
+      clusterName: {{ $releaseName }}
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: VCDMachineTemplate
-        name: {{ .Values.cluster.name }}-wp1-{{ .Values.cluster.kubernetesVersion }}
-        namespace: {{ .Release.Namespace }}
-      version: {{ .Values.cluster.kubernetesVersion }} 
+        name: {{ $releaseName }}-{{ $workerNodePool.poolName }}-{{ $cluster.kubernetesVersion }}
+        namespace: {{ $releaseNamespace }}
+      version: {{ $cluster.kubernetesVersion }}
+{{- end }} 

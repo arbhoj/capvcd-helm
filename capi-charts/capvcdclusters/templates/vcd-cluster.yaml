@@ -1,7 +1,7 @@
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: VCDCluster
 metadata:
-  name: {{ .Values.cluster.name }}
+  name: {{ .Release.Name }}
 spec:
   site: {{ .Values.vcd.site }}
   org:  {{ .Values.vcd.org }}
@@ -12,9 +12,9 @@ spec:
     secretRef:
       name: {{ .Values.cluster.capv_credentials_secret }}
       namespace: {{ .Release.Namespace }}
-  rdeId: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
+  rdeId: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Release.Name }}
   controlPlaneEndpoint:
-    host: {{ .Values.cluster.controlplane.vip_ip }}
+    host: {{ .Values.controlplane.vip_ip }}
     port: 6443
   #loadBalancerConfigSpec:
    # useOneArm: ${USE_ONE_ARM}

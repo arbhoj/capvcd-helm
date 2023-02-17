@@ -1,12 +1,12 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: {{ .Values.cluster.name }}
+  name: {{ .Release.Name }}
   labels:
     cni: {{ .Values.cluster.cni }}
     ccm: {{ .Values.cluster.ccm }}
     csi: {{ .Values.cluster.csi }}
-    konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
+    konvoy.d2iq.io/cluster-name: {{ .Release.Name }}
 spec:
   clusterNetwork:
     pods:
@@ -19,10 +19,10 @@ spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
     kind: KubeadmControlPlane
-    name: {{ .Values.cluster.name }}-control-plane
+    name: {{ .Release.Name }}-control-plane
     namespace: {{ .Release.Namespace }}
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: VCDCluster
-    name: {{ .Values.cluster.name }}
+    name: {{ .Release.Name }}
     namespace: {{ .Release.Namespace }} 

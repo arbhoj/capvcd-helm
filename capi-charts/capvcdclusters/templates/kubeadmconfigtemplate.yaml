@@ -1,15 +1,19 @@
+{{- $releaseName := .Release.Name  }}
+{{- $releaseNamespace := .Release.Namespace }}
+{{- $cluster := .Values.cluster }}
+{{- range $key, $workerNodePool := .Values.workerNodePools }}
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
-  name: {{ .Values.cluster.name }}-wp1
-  namespace: {{ .Release.Namespace }}
+  name: {{ $releaseName }}-{{ $workerNodePool.poolName }}
+  namespace: {{ $releaseNamespace }}
 spec:
   template:
     spec:
       users:
       - name: konvoy
         sshAuthorizedKeys:
-        {{- if .Values.cluster.workerNodes.ssh_key }}- {{ .Values.cluster.workerNodes.ssh_key }}{{- end }}
+        {{- if $workerNodePool.ssh_key }}- {{ $workerNodePool.ssh_key }}{{- end }}
         sudo: ALL=(ALL) NOPASSWD:ALL
       joinConfiguration:
         nodeRegistration:
@@ -80,3 +84,4 @@ spec:
           done
         path: /run/konvoy/restart-containerd-and-wait.sh
         permissions: "0700"
+{{- end }}

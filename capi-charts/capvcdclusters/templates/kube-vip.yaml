@@ -2,16 +2,16 @@ apiVersion: addons.cluster.x-k8s.io/v1beta1
 kind: ClusterResourceSet
 metadata:
   labels:
-    konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
-  name: kube-vip-cc-installation-{{ .Values.cluster.name }}
+    konvoy.d2iq.io/cluster-name: {{ .Release.Name }}
+  name: kube-vip-cc-installation-{{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
   clusterSelector:
     matchLabels:
-      konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
+      konvoy.d2iq.io/cluster-name: {{ .Release.Name }}
   resources:
   - kind: ConfigMap
-    name: kube-vip-cc-config-{{ .Values.cluster.name }}
+    name: kube-vip-cc-config-{{ .Release.Name }}
   strategy: ApplyAlways
 ---
 apiVersion: v1
@@ -117,4 +117,4 @@ data:
 kind: ConfigMap
 metadata:
   creationTimestamp: null
-  name: kube-vip-cc-config-{{ .Values.cluster.name }}
+  name: kube-vip-cc-config-{{ .Release.Name }}

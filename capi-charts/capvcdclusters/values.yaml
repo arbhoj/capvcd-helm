@@ -1,39 +1,60 @@
-cluster:
-  cni: external
-  ccm: antrea
-  csi: external
-  cidr:
-    pod: 99.96.0.0/11
-    service: 99.64.0.0/13
-  kubernetesVersion: v1.24.6
-  lastKubernetesVersion: null
-  lastvCDTemplate: null
-  isManagement: false
-  controlPlaneVIP:
-  http_proxy:
-  https_proxy:
-  no_proxy:
-  encryptionConfigValueB64: a2luZDogRW5jcnlwdGlvbkNvbmZpZwphcGlWZXJzaW9uOiB2MQpyZXNvdXJjZXM6CiAgLSByZXNvdXJjZXM6CiAgICAgIC0gc2VjcmV0cwogICAgICAtIGNvbmZpZ21hcHMKICAgIHByb3ZpZGVyczoKICAgICAgLSBhZXNjYmM6CiAgICAgICAgICBrZXlzOgogICAgICAgICAgICAtIG5hbWU6IGtleQogICAgICAgICAgICAgIHNlY3JldDogYW5BU2pDYk9JMFcxT3NJbHdpS1FKWHRHT2JQR0dkWHprMGpGYkNSRjNKbz0KICAgICAgLSBpZGVudGl0eToge30=
-  controlplane:
-    vip_interface:
-    vip_ip:
-    ssh_key:
-    replicas: 3
-vcd:
-  refreshToken:
-  site: https://192.168.140.181
-  org: d2iq
-  org_vdc: Oscorp-Workload
-  org_vdc_network: Oscorp-Workload-Network
-controlMachinePlaneTemplate:
-  catalog: dkp
-  vAppTemplate: dkp-2.4.0-airgapped-ubuntu-k8s-v1.24.6
-  sizingPolicy: dkp_control_standard
-  placementPolicy:
-  storageProfile: vSAN Default Storage Policy
-  enableNvidiaGPU: false
-workerNodesMachineTemplate:
-  sizingPolicy: dkp_worker_standard
-  placementPolicy:
-  storageProfile: vSAN Default Storage Policy
-  enableNvidiaGPU: false
+#vcd:
+#  site: https://192.168.140.181
+#  org: d2iq
+#  org_vdc: Oscorp-Workload
+#  org_vdc_network: Oscorp-Workload-Network
+#cluster:
+#  cni: antrea
+#  ccm: external
+#  csi: external
+#  kubernetesVersion: v1.24.6
+#  catalog: dkp
+#  vAppTemplate: dkp-2.4.0-airgapped-ubuntu-k8s-v1.24.6
+#  kubernetes_pv_storageProfile: vSAN Default Storage Policy
+#  cidr:
+#    pod: 99.96.0.0/11
+#    service: 99.64.0.0/13
+#  k8s_svc_vip_range: 10.39.0.57-10.39.0.60
+#  isManagement: false
+#  http_proxy:
+#  https_proxy:
+#  no_proxy:
+#  refresh_token_b64: # Base64 Encoded refresh token
+#  capv_credentials_secret: capi-user-credentials-oscorp-workload
+#  encryptionConfigValueB64: a2luZDogRW5jcnlwdGlvbkNvbmZpZwphcGlWZXJzaW9uOiB2MQpyZXNvdXJjZXM6CiAgLSByZXNvdXJjZXM6CiAgICAgIC0gc2VjcmV0cwogICAgICAtIGNvbmZpZ21hcHMKICAgIHByb3ZpZGVyczoKICAgICAgLSBhZXNjYmM6CiAgICAgICAgICBrZXlzOgogICAgICAgICAgICAtIG5hbWU6IGtleQogICAgICAgICAgICAgIHNlY3JldDogYW5BU2pDYk9JMFcxT3NJbHdpS1FKWHRHT2JQR0dkWHprMGpGYkNSRjNKbz0KICAgICAgLSBpZGVudGl0eToge30=
+#controlplane:
+#  vip_interface: ens160
+#  vip_ip: 10.39.0.56
+#  ssh_key:
+#  replicas: 3
+#  ssh_key:
+#  controlPlaneMachineTemplate:
+#    sizingPolicy: dkp_control_standard
+#    placementPolicy: null
+#    storageProfile: vSAN Default Storage Policy
+#    enableNvidiaGPU: false
+#    catalog: dkp-test-cp
+#    vAppTemplate: dkp-2.4.0-airgapped-ubuntu-test-k8s-v1.24.6
+#workerNodePools:
+#- poolName: wkrp1
+#  replicas: 2
+#  ssh_key:
+#  workerNodesMachineTemplate:
+#    sizingPolicy: dkp_worker_standard
+#    placementPolicy: null
+#    storageProfile: vSAN Default Storage Policy
+#    enableNvidiaGPU: false
+#    catalog: dkp-test-wp #Optionally Override value decleared at cluster level
+#    vAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.25.6 #Optionally Override value decleared at cluster level
+#    lastvAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.24.6 #Optionally Override value decleared at cluster level
+#- poolName: wkrp2
+#  replicas: 2
+#  ssh_key:
+#  workerNodesMachineTemplate:
+#    sizingPolicy: dkp_worker_standard
+#    placementPolicy: null
+#    storageProfile: vSAN Default Storage Policy
+#    enableNvidiaGPU: false
+#    catalog:  #Optionally Override value decleared at cluster level
+#    vAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp2-k8s-v1.25.6 #Optionally Override value decleared at cluster level
+#    lastvAppTemplate: dkp-2.4.0-airgapped-ubuntu-wp1-k8s-v1.24.6 #Optionally Override value decleared at cluster level

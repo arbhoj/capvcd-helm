@@ -2,30 +2,30 @@ apiVersion: addons.cluster.x-k8s.io/v1alpha4
 kind: ClusterResourceSet
 metadata:
   labels:
-    konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
-  name: ccm-cpi-config-{{ .Values.cluster.name }}
+    konvoy.d2iq.io/cluster-name: {{ .Release.Name }}
+  name: ccm-cpi-config-{{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
   clusterSelector:
     matchLabels:
-      konvoy.d2iq.io/cluster-name: {{ .Values.cluster.name }}
+      konvoy.d2iq.io/cluster-name: {{ .Release.Name }}
   resources:
   - kind: ConfigMap
-    name: capvcd-cm-{{ .Values.cluster.name }}
+    name: capvcd-cm-{{ .Release.Name }}
   - kind: Secret
-    name: capvcd-secret-{{ .Values.cluster.name }}
+    name: capvcd-secret-{{ .Release.Name }}
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: capvcd-secret-{{ .Values.cluster.name }}
+  name: capvcd-secret-{{ .Release.Name }}
 type: addons.cluster.x-k8s.io/resource-set
 stringData:
   capvcd-secret.yaml: |-
     ---
     apiVersion: v1
     stringData:
-      clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }} 
+      clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Release.Name }} 
     kind: Secret
     metadata:
       name: vcloud-clusterid-secret
@@ -42,7 +42,7 @@ stringData:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: capvcd-cm-{{ .Values.cluster.name }}
+  name: capvcd-cm-{{ .Release.Name }}
 data:
   capvcd-config.yaml: |-
     ---
@@ -57,8 +57,8 @@ data:
           host: {{ .Values.vcd.site }}
           org: {{ .Values.vcd.org }}
           vdc: {{ .Values.vcd.org_vdc }}
-          vAppName: {{ .Values.cluster.name }}
-        clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
+          vAppName: {{ .Release.Name }}
+        clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Release.Name }}
     immutable: true
     ---
     apiVersion: v1
@@ -72,8 +72,8 @@ data:
           host: {{ .Values.vcd.site }}
           org: {{ .Values.vcd.org }}
           vdc: {{ .Values.vcd.org_vdc }}
-        clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Values.cluster.name }}
-        vAppName: {{ .Values.cluster.name }}
+        clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Release.Name }}
+        vAppName: {{ .Release.Name }}
         loadbalancer:
           network: {{ .Values.vcd.org_vdc_network }}
           enableVirtualServiceSharedIP: true
