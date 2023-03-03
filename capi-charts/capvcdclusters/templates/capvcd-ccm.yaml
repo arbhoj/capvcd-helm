@@ -34,6 +34,8 @@ stringData:
     apiVersion: v1
     data:
       refreshToken: {{ .Values.cluster.refresh_token_b64 }}
+      password: {{ .Values.cluster.password }}
+      username: {{ .Values.cluster.username }}
     kind: Secret
     metadata:
       name: vcloud-basic-auth
