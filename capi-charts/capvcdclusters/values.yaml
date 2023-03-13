@@ -15,6 +15,7 @@
 #    pod: 99.96.0.0/11
 #    service: 99.64.0.0/13
 #  k8s_svc_vip_range: 10.39.0.57-10.39.0.60
+#  external_vip: 170.205.64.204
 #  isManagement: false
 #  http_proxy:
 #  https_proxy:

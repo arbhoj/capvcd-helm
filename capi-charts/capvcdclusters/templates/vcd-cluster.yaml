@@ -14,7 +14,7 @@ spec:
       namespace: {{ .Release.Namespace }}
   rdeId: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Release.Name }}
   controlPlaneEndpoint:
-    host: {{ .Values.controlplane.vip_ip }}
+    host: {{ .Values.cluster.external_vip | default .Values.controlplane.vip_ip }}
     port: 6443
   #loadBalancerConfigSpec:
    # useOneArm: ${USE_ONE_ARM}

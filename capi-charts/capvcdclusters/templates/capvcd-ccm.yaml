@@ -51,21 +51,6 @@ data:
     apiVersion: v1
     kind: ConfigMap
     metadata:
-      name: vcloud-csi-configmap
-      namespace: kube-system
-    data:
-      vcloud-csi-config.yaml: |+
-        vcd:
-          host: {{ .Values.vcd.site }}
-          org: {{ .Values.vcd.org }}
-          vdc: {{ .Values.vcd.org_vdc }}
-          vAppName: {{ .Release.Name }}
-        clusterid: NO_RDE_{{ .Values.vcd.org_vdc }}-{{ .Release.Name }}
-    immutable: true
-    ---
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
       name: vcloud-ccm-configmap
       namespace: kube-system
     data:
@@ -86,15 +71,3 @@ data:
             http: 80
             https: 443
     immutable: true
-    ---
-    kind: StorageClass
-    apiVersion: storage.k8s.io/v1
-    metadata:
-      annotations:
-        storageclass.kubernetes.io/is-default-class: "true"
-      name: vcd-disk-dev
-    provisioner: named-disk.csi.cloud-director.vmware.com
-    reclaimPolicy: Delete
-    parameters:
-      storageProfile: {{ .Values.cluster.kubernetes_pv_storageProfile }}
-      filesystem: "ext4"
