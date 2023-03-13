@@ -1,0 +1,19 @@
+{{ if .Values.cluster.external_vip -}}
+---  
+apiVersion: kommander.mesosphere.io/v1beta1
+kind: KommanderCluster
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  kubeconfigRef:
+    name: {{ .Release.Name }}-kubeconfig
+  clusterRef:
+    capiCluster:
+      name: {{ .Release.Name }}
+  ingress:
+    hostname: {{ .Values.cluster.external_vip | default .Values.controlplane.vip_ip }} 
+    issuerRef:
+      name: kommander-ca
+      kind: ClusterIssuer
+{{- end }}
